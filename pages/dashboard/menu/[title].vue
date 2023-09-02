@@ -1,0 +1,114 @@
+<template>
+    <div>
+        <div
+            class="block max-w p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-10">
+            <div class="flex justify-between">
+                <div>
+                    <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{
+                        store.selectedMenu.full_title }}
+                    </h5>
+                    <p class="font-light text-gray-600 dark:text-gray-400 capitalize">{{ store.selectedMenu.menu_title }}
+                    </p>
+                </div>
+
+                <div>
+                    <button type="button" data-modal-target="editMenu" data-modal-toggle="editMenu" @click="fillForm()"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</button>
+                </div>
+            </div>
+            <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+            <p class="font-semibold text-gray-700 dark:text-gray-400 capitalize">Deskripsi :</p>
+            <p class="font-light text-justify text-gray-600 dark:text-gray-400">{{ store.selectedMenu.description }}</p>
+        </div>
+
+        <div id="editMenu" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            Edit
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-hide="editMenu">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
+                        <div class="mb-6">
+                            <label for="full_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Title</label>
+                            <input type="text" id="full_title" v-model="this.menu.full_title"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="" required>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="menu_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Menu Title</label>
+                            <input type="text" id="menu_title" v-model="this.menu.menu_title"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="" required>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                            <input type="text" id="description" v-model="this.menu.description"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="" required>
+                        </div>
+
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="editMenu" type="button" @click="store.editMenus(menu)"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I
+                            Submit</button>
+                        <button data-modal-hide="editMenu" type="button"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { initModals } from 'flowbite'
+import { useMenuStore } from '~/store/menu'
+
+definePageMeta({
+    layout: "admin",
+})
+
+export default {
+    data() {
+        return {
+            store: useMenuStore(),
+            
+            menu: {
+                full_title: '',
+                menu_title: '',
+                description: ''
+            }
+        }
+    },
+    mounted() {
+        initModals()
+    },
+    methods: {
+        fillForm() {
+            this.menu.full_title = this.store.selectedMenu.full_title
+            this.menu.menu_title = this.store.selectedMenu.menu_title
+            this.menu.description = this.store.selectedMenu.description
+        }
+    },
+
+}
+</script>
